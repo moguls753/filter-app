@@ -9,7 +9,7 @@ class SourcesController < ApplicationController
   def index
     @count = Source.group(:type).count
     @sources_feed = Source.where("type = 'FeedSource'")
-    @sources_yt = Source.where("type = 'YoutubeSource'")
+    @@sources_youtube = Source.where("type = 'YoutubeSource'")
     @sources_podcasts = Source.where("type = 'PodcastSource'")
     @sources_socialmedia = Source.where("type = 'RedditSource' OR type = 'TwitterSource' OR type = 'FacebookSource'")
 
@@ -17,7 +17,7 @@ class SourcesController < ApplicationController
     when "feed"
       @sources = @sources_feed
     when "yt"
-      @sources = @sources_yt
+      @sources = @@sources_youtube
     when "podcasts"
       @sources = @sources_podcasts
     when "socialmedia"
@@ -25,7 +25,7 @@ class SourcesController < ApplicationController
     else
       @sources = @sources_feed
     end
-
+  
   end
 
   def show
